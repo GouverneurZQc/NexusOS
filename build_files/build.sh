@@ -25,3 +25,4 @@ dnf5 install -y tmux
 #### Example for enabling a System Unit File
 
 systemctl enable podman.socket
+dnf5 config-manager setopt "terra-mesa".enabled=false
