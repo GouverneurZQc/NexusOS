@@ -3,20 +3,12 @@ FROM scratch AS ctx
 COPY build_files /
 COPY system_files /system_files
 
-FROM ghcr.io/ublue-os/bazzite:stable
-COPY build_files /
-COPY system_files /system_files
-
 # Base Image
-FROM scratch AS ctx
-COPY build_files /
-COPY system_files /system_files
-
-FROM ghcr.io/ublue-os/bazzite:stable
+FROM ghcr.io/ublue-os/bazzite:stable@sha256:b923f92d5a5b59eb992e269383eba2744601052da9d3d1595f76e79aa6ce2df0
 ## Other possible base images include:
-# FROM ghcr.io/ublue-os/bazzite:stable
-# FROM ghcr.io/ublue-os/bazzite:stable
-# FROM ghcr.io/ublue-os/bazzite:stable
+# FROM ghcr.io/ublue-os/bazzite:testing
+# FROM ghcr.io/ublue-os/aurora:stable
+# FROM ghcr.io/ublue-os/bluefin-nvidia-open:stable
 # 
 # ... and so on, here are more base images
 # Universal Blue Images: https://github.com/orgs/ublue-os/packages
@@ -47,4 +39,3 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
 ### LINTING
 ## Verify final image and contents are correct.
 RUN bootc container lint
-
