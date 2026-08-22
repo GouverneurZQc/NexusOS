@@ -1,0 +1,8 @@
+﻿[Plymouth Theme]
+Name=NextOS
+Description=NextOS Premium Gaming Boot Theme
+ModuleName=script
+
+[script]
+ImageDir=/usr/share/plymouth/themes/nextos/images
+ScriptFile=/usr/share/plymouth/themes/nextos/nextos.script
