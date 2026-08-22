@@ -27,3 +27,7 @@ dnf5 install -y tmux
 systemctl enable podman.socket
 dnf5 config-manager setopt "terra-mesa".enabled=false
 sed -i "/terra-mesa/,/^$/ s/^enabled=.*/enabled=0/" /etc/yum.repos.d/*.repo
+
+if command -v plymouth-set-default-theme; then
+    plymouth-set-default-theme nextos
+fi
