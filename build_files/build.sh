@@ -31,3 +31,13 @@ sed -i "/terra-mesa/,/^$/ s/^enabled=.*/enabled=0/" /etc/yum.repos.d/*.repo
 if command -v plymouth-set-default-theme; then
     plymouth-set-default-theme nextos
 fi
+
+# NextOS Branding Override
+
+cp -f /ctx/system_files/etc/os-release /etc/os-release
+
+mkdir -p /usr/share/nextos
+
+cp -rf /ctx/system_files/usr/share/nextos/* /usr/share/nextos/
+
+echo "NextOS branding applied"
