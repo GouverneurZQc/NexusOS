@@ -2,27 +2,24 @@
 
 set -ouex pipefail
 
-# Save distro fields bootc-image-builder needs (ID, CPE_NAME, VERSION_ID)
-BASE_OS_RELEASE=/tmp/os-release.base
-cp /etc/os-release "${BASE_OS_RELEASE}"
-# shellcheck disable=SC1090
-. "${BASE_OS_RELEASE}"
-BASE_VERSION_ID="${VERSION_ID:-44}"
-BASE_ID="${ID:-fedora}"
-BASE_ID_LIKE="${ID_LIKE:-fedora}"
-BASE_CPE="${CPE_NAME:-cpe:/o:fedoraproject:fedora:${BASE_VERSION_ID}}"
+# Keep Fedora VERSION_ID from the base image; force ID=fedora so
+# bootc-image-builder can produce an Anaconda ISO (it looks up distro defs).
+BASE_VERSION_ID="44"
+if [[ -f /etc/os-release ]]; then
+    # shellcheck disable=SC1091
+    BASE_VERSION_ID="$(. /etc/os-release && echo "${VERSION_ID:-44}")"
+fi
 
 # Copy the contents of system_files/ of the git repo to /
 cp -avf "/ctx/system_files"/. /
 
-# Branding names stay Barbakaï; keep a real Fedora/Bazzite ID so ISO builds work
 sed -i "s/^VERSION_ID=.*/VERSION_ID=\"${BASE_VERSION_ID}\"/" /etc/os-release
-sed -i "s/^ID=.*/ID=${BASE_ID}/" /etc/os-release
-sed -i "s/^ID_LIKE=.*/ID_LIKE=\"${BASE_ID_LIKE}\"/" /etc/os-release
+sed -i 's/^ID=.*/ID=fedora/' /etc/os-release
+sed -i 's/^ID_LIKE=.*/ID_LIKE="fedora"/' /etc/os-release
 if grep -q '^CPE_NAME=' /etc/os-release; then
-    sed -i "s|^CPE_NAME=.*|CPE_NAME=\"${BASE_CPE}\"|" /etc/os-release
+    sed -i "s|^CPE_NAME=.*|CPE_NAME=\"cpe:/o:fedoraproject:fedora:${BASE_VERSION_ID}\"|" /etc/os-release
 else
-    echo "CPE_NAME=\"${BASE_CPE}\"" >> /etc/os-release
+    echo "CPE_NAME=\"cpe:/o:fedoraproject:fedora:${BASE_VERSION_ID}\"" >> /etc/os-release
 fi
 
 chmod 0755 /usr/bin/barbakai-info /usr/bin/barbakai-first-login /usr/bin/nexus-info /usr/libexec/barbakai-firstboot.sh
