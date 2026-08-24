@@ -8,17 +8,9 @@ groups = ["wheel"]
 
 [customizations.installer.kickstart]
 contents = """
-# Barbakaï OS — compte personnel déjà créé
-user --name=barbakai --groups=wheel --password=Thegamecontrol! --plaintext
-rootpw --lock
-
 %post
-bootc switch --mutate-in-place --transport registry ghcr.io/gouverneurzqc/nexusos:latest || true
+bootc switch --mutate-in-place --transport registry ghcr.io/gouverneurzqc/nexusos:latest
 echo barbakai > /etc/hostname
-if ! id barbakai >/dev/null 2>&1; then
-  useradd -m -G wheel barbakai || true
-  echo 'barbakai:Thegamecontrol!' | chpasswd || true
-fi
 %end
 """
 

@@ -1,7 +1,7 @@
 NAME="Barbakaï"
 VERSION="1.0"
-ID=barbakai
-ID_LIKE="bazzite fedora"
+ID=fedora
+ID_LIKE="fedora"
 VERSION_ID="44"
 VERSION_CODENAME="The Game Control"
 PRETTY_NAME="Barbakaï OS"
@@ -16,4 +16,4 @@ BUG_REPORT_URL="https://github.com/GouverneurZQc/NexusOS/issues"
 VENDOR_NAME="Barbakaï"
 VENDOR_URL="https://github.com/GouverneurZQc/NexusOS"
 DEFAULT_HOSTNAME=barbakai
-CPE_NAME="cpe:/o:barbakai:barbakai_os:1.0"
+CPE_NAME="cpe:/o:fedoraproject:fedora:44"

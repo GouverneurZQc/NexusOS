@@ -8,11 +8,8 @@ groups = ["wheel"]
 
 [customizations.installer.kickstart]
 contents = """
-user --name=barbakai --groups=wheel --password=Thegamecontrol! --plaintext
-rootpw --lock
-
 %post
-bootc switch --mutate-in-place --transport registry ghcr.io/gouverneurzqc/nexusos:latest || true
+bootc switch --mutate-in-place --transport registry ghcr.io/gouverneurzqc/nexusos:latest
 echo barbakai > /etc/hostname
 %end
 """
