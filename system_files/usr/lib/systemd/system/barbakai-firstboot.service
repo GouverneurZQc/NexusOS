@@ -1,0 +1,12 @@
+[Unit]
+Description=Barbakaï first boot (hostname + user)
+After=local-fs.target systemd-user-sessions.service
+ConditionPathExists=!/var/lib/barbakai/firstboot-done
+
+[Service]
+Type=oneshot
+ExecStart=/usr/libexec/barbakai-firstboot.sh
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target

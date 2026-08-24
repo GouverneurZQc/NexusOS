@@ -1,0 +1,30 @@
+#!/usr/bin/bash
+cat <<'EOF'
+
+  ╔══════════════════════════════════════════════╗
+  ║              B A R B A K A Ï   O S           ║
+  ║              The Game Control                ║
+  ╚══════════════════════════════════════════════╝
+
+  Version     : 1.0
+  Base        : Fedora / Bazzite (Universal Blue)
+  Bureau      : KDE Plasma
+  Machine     : barbakai
+  Compte      : barbakai
+
+  Steam, Proton, GameMode, MangoHud : déjà là.
+  Pas de clé d'activation. Jamais.
+
+  Premier mot de passe (à changer) :
+      Thegamecontrol!
+
+  Commandes utiles
+    steam                 Lancer Steam
+    fastfetch             Fiche machine
+    ujust                 Recettes Bazzite
+    rpm-ostree status     Image bootc actuelle
+    sudo bootc upgrade    Mise à jour de l'OS
+
+  GitHub : https://github.com/GouverneurZQc/NexusOS
+
+EOF

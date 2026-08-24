@@ -2,42 +2,46 @@
 
 set -ouex pipefail
 
+# Keep the base image version id before branding overwrites os-release
+BASE_VERSION_ID="44"
+if [[ -f /etc/os-release ]]; then
+    # shellcheck disable=SC1091
+    BASE_VERSION_ID="$(. /etc/os-release && echo "${VERSION_ID:-44}")"
+fi
+
 # Copy the contents of system_files/ of the git repo to /
 cp -avf "/ctx/system_files"/. /
+
+if [[ -f /etc/os-release ]]; then
+    sed -i "s/^VERSION_ID=.*/VERSION_ID=\"${BASE_VERSION_ID}\"/" /etc/os-release
+fi
+
+chmod 0755 /usr/bin/barbakai-info /usr/bin/barbakai-first-login /usr/bin/nexus-info /usr/libexec/barbakai-firstboot.sh
 
 ### Install packages
 
 # Packages can be installed from any enabled yum repo on the image.
 # RPMfusion repos are available by default in ublue main images
-# List of rpmfusion packages can be found here:
-# https://mirrors.rpmfusion.org/mirrorlist?path=free/fedora/updates/43/x86_64/repoview/index.html&protocol=https&redirect=1
 
-# this installs a package from fedora repos
-dnf5 install -y tmux plymouth-plugin-script
-
-# Use a COPR Example:
-#
-# dnf5 -y copr enable ublue-os/staging
-# dnf5 -y install package
-# Disable COPRs so they don't end up enabled on the final image:
-# dnf5 -y copr disable ublue-os/staging
-
-#### Example for enabling a System Unit File
+dnf5 install -y tmux plymouth-plugin-script btop
 
 systemctl enable podman.socket
+systemctl enable barbakai-firstboot.service
+
 dnf5 config-manager setopt "terra-mesa".enabled=false
 sed -i "/terra-mesa/,/^$/ s/^enabled=.*/enabled=0/" /etc/yum.repos.d/*.repo
 
-if command -v plymouth-set-default-theme; then
-    plymouth-set-default-theme nextos
+# Keep a NextOS-named copy so leftover configs still resolve
+if [[ -d /usr/share/plymouth/themes/barbakai ]]; then
+    mkdir -p /usr/share/plymouth/themes/nextos
+    cp -a /usr/share/plymouth/themes/barbakai/. /usr/share/plymouth/themes/nextos/ || true
 fi
 
-# NextOS Branding Override
+if command -v plymouth-set-default-theme; then
+    plymouth-set-default-theme barbakai || plymouth-set-default-theme nextos || true
+fi
 
-cp -f /ctx/system_files/etc/os-release /etc/os-release
+mkdir -p /usr/share/barbakai
+cp -rf /ctx/system_files/usr/share/barbakai/* /usr/share/barbakai/ 2>/dev/null || true
 
-mkdir -p /usr/share/nextos
-
-cp -rf /ctx/system_files/usr/share/nextos/* /usr/share/nextos/
-
-echo "NextOS branding applied"
+echo "Barbakaï OS branding applied"

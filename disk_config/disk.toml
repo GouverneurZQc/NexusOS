@@ -1,3 +1,11 @@
+[customizations]
+hostname = "barbakai"
+
+[[customizations.user]]
+name = "barbakai"
+password = "Thegamecontrol!"
+groups = ["wheel"]
+
 [[customizations.filesystem]]
 mountpoint = "/"
-minsize = "20 GiB"
+minsize = "40 GiB"

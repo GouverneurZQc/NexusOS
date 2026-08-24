@@ -1,13 +1,2 @@
-﻿#!/usr/bin/bash
-
-echo
-echo "======================================"
-echo "          NEXUS OS GAMING"
-echo "======================================"
-echo
-echo "Version : 0.1 Foundation"
-echo "Base    : Universal Blue / Bazzite"
-echo "Desktop : KDE Plasma"
-echo
-echo "Gaming first."
-echo
+#!/usr/bin/bash
+exec /usr/bin/barbakai-info "$@"

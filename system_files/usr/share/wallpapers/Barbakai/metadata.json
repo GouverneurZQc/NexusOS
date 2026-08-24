@@ -1,0 +1,13 @@
+{
+    "KPlugin": {
+        "Authors": [
+            {
+                "Name": "Barbakaï"
+            }
+        ],
+        "Id": "Barbakai",
+        "License": "LicenseRef-Proprietary",
+        "Name": "Barbakaï",
+        "Name[fr]": "Barbakaï"
+    }
+}

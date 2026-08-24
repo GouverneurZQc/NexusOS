@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<!DOCTYPE wallpapers SYSTEM "gnome-wp-list.dtd">
+<wallpapers>
+  <wallpaper deleted="false">
+    <name>Barbakaï</name>
+    <filename>/usr/share/backgrounds/barbakai/barbakai-wallpaper.jpeg</filename>
+    <options>zoom</options>
+    <shade_type>solid</shade_type>
+    <pcolor>#05010a</pcolor>
+    <scolor>#05010a</scolor>
+  </wallpaper>
+</wallpapers>

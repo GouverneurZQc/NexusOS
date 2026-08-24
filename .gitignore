@@ -5,4 +5,12 @@ _build-*/**
 *_chunkah_*
 *_rpm-ostree_*
 
-cosign.key
+# Local ISOs, VM disks, generated previews
+Artifacts/
+ISO/
+NextOS-ISO/
+NexusOS Test/
+artifact-anaconda-iso/
+artifact-qcow2/
+branding/out/
+vm-barbakai/

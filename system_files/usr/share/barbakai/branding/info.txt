@@ -1,0 +1,14 @@
+Barbakaï OS
+The Game Control
+
+Version: 1.0
+Edition: Gaming Edition
+
+Compte : barbakai
+Machine : barbakai
+
+Pas de clé d'activation.
+Fait pour remplacer Windows au quotidien
+sur la tour gaming et le PC serveur.
+
+GitHub : https://github.com/GouverneurZQc/NexusOS

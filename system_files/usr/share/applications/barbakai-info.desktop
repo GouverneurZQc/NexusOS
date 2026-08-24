@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Barbakaï
+Comment=Identité de Barbakaï OS
+Exec=konsole -e barbakai-info
+Icon=barbakai
+Terminal=false
+Categories=System;

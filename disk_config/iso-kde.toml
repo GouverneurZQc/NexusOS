@@ -1,7 +1,19 @@
+[customizations]
+hostname = "barbakai"
+
+[[customizations.user]]
+name = "barbakai"
+password = "Thegamecontrol!"
+groups = ["wheel"]
+
 [customizations.installer.kickstart]
 contents = """
+user --name=barbakai --groups=wheel --password=Thegamecontrol! --plaintext
+rootpw --lock
+
 %post
-bootc switch --mutate-in-place --transport registry ghcr.io/ublue-os/image-template:latest
+bootc switch --mutate-in-place --transport registry ghcr.io/gouverneurzqc/nexusos:latest || true
+echo barbakai > /etc/hostname
 %end
 """
 
@@ -10,12 +22,12 @@ enable = [
   "org.fedoraproject.Anaconda.Modules.Storage",
   "org.fedoraproject.Anaconda.Modules.Runtime",
   "org.fedoraproject.Anaconda.Modules.Network",
-  "org.fedoraproject.Anaconda.Modules.Security",
-  "org.fedoraproject.Anaconda.Modules.Services",
-  "org.fedoraproject.Anaconda.Modules.Users",
   "org.fedoraproject.Anaconda.Modules.Timezone"
 ]
 
 disable = [
   "org.fedoraproject.Anaconda.Modules.Subscription",
+  "org.fedoraproject.Anaconda.Modules.Users",
+  "org.fedoraproject.Anaconda.Modules.Security",
+  "org.fedoraproject.Anaconda.Modules.Services"
 ]

@@ -1,0 +1,29 @@
+#!/usr/bin/bash
+set -euo pipefail
+
+FLAG="${HOME}/.config/barbakai/setup-done"
+WALL="/usr/share/wallpapers/Barbakai/contents/images/2560x1440.jpg"
+if [[ ! -f "${WALL}" ]]; then
+    WALL="/usr/share/barbakai/wallpapers/barbakai-wallpaper.jpeg"
+fi
+
+mkdir -p "${HOME}/.config/barbakai"
+
+if [[ -f "${FLAG}" ]]; then
+    exit 0
+fi
+
+if command -v plasma-apply-wallpaperimage >/dev/null 2>&1 && [[ -f "${WALL}" ]]; then
+    plasma-apply-wallpaperimage "${WALL}" || true
+fi
+
+if command -v kwriteconfig6 >/dev/null 2>&1; then
+    kwriteconfig6 --file kdeglobals --group General --key Name "Barbakaï"
+    kwriteconfig6 --file kdeglobals --group KDE --key LookAndFeelPackage "org.kde.breezedark.desktop"
+    if [[ -f "${WALL}" ]]; then
+        kwriteconfig6 --file kscreenlockerrc --group Greeter --group Wallpaper --group org.kde.image --group General --key Image "file://${WALL}"
+    fi
+fi
+
+touch "${FLAG}"
+exit 0

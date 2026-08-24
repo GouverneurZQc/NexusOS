@@ -1,11 +1,8 @@
-﻿NextOS
-Gaming Evolved
+Barbakaï OS
+The Game Control
 
 Version: 1.0
 Edition: Gaming Edition
 
-NextOS Ecosystem:
-- NextGame
-- NextBrowser
-- NextControl
-- NextStore
+Compte : barbakai
+GitHub : https://github.com/GouverneurZQc/NexusOS

@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Barbakaï Setup
+Comment=Apply Barbakaï wallpaper and identity on first login
+Exec=/usr/bin/barbakai-first-login
+X-KDE-autostart-phase=2
+X-GNOME-Autostart-enabled=true
+Hidden=false
+NoDisplay=true

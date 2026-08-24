@@ -1,0 +1,8 @@
+[Plymouth Theme]
+Name=Barbakaï
+Description=Barbakaï OS boot theme
+ModuleName=script
+
+[script]
+ImageDir=/usr/share/plymouth/themes/barbakai/images
+ScriptFile=/usr/share/plymouth/themes/barbakai/barbakai.script

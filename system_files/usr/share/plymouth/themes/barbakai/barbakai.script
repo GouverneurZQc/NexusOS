@@ -1,0 +1,42 @@
+# Barbakaï OS Plymouth theme
+
+screen_width = Window.GetWidth();
+screen_height = Window.GetHeight();
+
+Window.SetBackgroundTopColor(0.01, 0.01, 0.03);
+Window.SetBackgroundBottomColor(0.015, 0.00, 0.04);
+
+logo.image = Image("logo.png");
+max_logo_h = screen_height * 0.32;
+if (logo.image.GetHeight() > max_logo_h) {
+    ratio = max_logo_h / logo.image.GetHeight();
+    logo.image = logo.image.Scale(logo.image.GetWidth() * ratio, logo.image.GetHeight() * ratio);
+}
+
+word.image = Image("wordmark.png");
+max_word_w = screen_width * 0.40;
+if (word.image.GetWidth() > max_word_w) {
+    ratio = max_word_w / word.image.GetWidth();
+    word.image = word.image.Scale(word.image.GetWidth() * ratio, word.image.GetHeight() * ratio);
+}
+
+gap = 24;
+bundle_h = logo.image.GetHeight() + gap + word.image.GetHeight();
+origin_y = screen_height / 2 - bundle_h / 2;
+
+logo.sprite = Sprite(logo.image);
+logo.sprite.SetX(Window.GetX() + screen_width / 2 - logo.image.GetWidth() / 2);
+logo.sprite.SetY(Window.GetY() + origin_y);
+
+word.sprite = Sprite(word.image);
+word.sprite.SetX(Window.GetX() + screen_width / 2 - word.image.GetWidth() / 2);
+word.sprite.SetY(Window.GetY() + origin_y + logo.image.GetHeight() + gap);
+
+pulse = 0;
+fun refresh_callback () {
+    pulse++;
+    fade = 0.74 + 0.26 * Math.Sin(pulse / 14);
+    logo.sprite.SetOpacity(fade);
+}
+
+Plymouth.SetRefreshFunction(refresh_callback);
